@@ -4,7 +4,6 @@ from .models import Project, Contributor, Issue, Comment
 
 User = get_user_model()
 
-# Sérialiseur User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -27,7 +26,6 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-# Sérialiseur Project
 class ProjectSerializer(serializers.ModelSerializer):
     author_user = serializers.ReadOnlyField(source='author_user.id')
 
@@ -35,13 +33,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = '__all__'
 
-# Sérialiseur Contributor
 class ContributorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contributor
         fields = '__all__'
 
-# Sérialiseur Issue
 class IssueSerializer(serializers.ModelSerializer):
     author_user = serializers.ReadOnlyField(source='author_user.id')
 
@@ -49,7 +45,6 @@ class IssueSerializer(serializers.ModelSerializer):
         model = Issue
         fields = '__all__'
 
-# Sérialiseur Comment
 class CommentSerializer(serializers.ModelSerializer):
     author_user = serializers.ReadOnlyField(source='author_user.id')
 

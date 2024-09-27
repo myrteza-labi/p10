@@ -1,18 +1,13 @@
 from django.db import models
-
-# Create your models here.
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 import uuid
 
-# Modèle User
 class User(AbstractUser):
     age = models.PositiveIntegerField()
     can_be_contacted = models.BooleanField()
     can_data_be_shared = models.BooleanField()
 
-# Modèle Project
 class Project(models.Model):
     BACK_END = 'BE'
     FRONT_END = 'FE'
@@ -34,7 +29,6 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
-# Modèle Contributor
 class Contributor(models.Model):
     user = models.ForeignKey('api.User', on_delete=models.CASCADE)
     project = models.ForeignKey('api.Project', on_delete=models.CASCADE, related_name='contributors')
@@ -47,7 +41,6 @@ class Contributor(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.project.name}"
 
-# Modèle Issue
 class Issue(models.Model):
     BUG = 'BUG'
     FEATURE = 'FEATURE'
@@ -89,7 +82,6 @@ class Issue(models.Model):
     def __str__(self):
         return self.title
 
-# Modèle Comment
 class Comment(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     issue = models.ForeignKey('api.Issue', on_delete=models.CASCADE, related_name='comments')

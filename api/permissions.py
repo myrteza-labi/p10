@@ -1,7 +1,6 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from .models import Contributor
 
-# Permission IsAuthorOrReadOnly
 class IsAuthorOrReadOnly(BasePermission):
     """
     L'auteur peut modifier ou supprimer la ressource.
@@ -12,7 +11,6 @@ class IsAuthorOrReadOnly(BasePermission):
             return True
         return obj.author_user == request.user
 
-# Permission IsContributor
 class IsContributor(BasePermission):
     """
     Vérifie si l'utilisateur est contributeur du projet.
